@@ -18,8 +18,17 @@ make (It takes a while to compile - 2+ hours)
 sudo make install
 ```
 
+## Install Java (If necessary)
+```sh
+sudo apt-get update && sudo apt-get install oracle-java7-jdk
+```
+
 ## Install Cassandra
-TODO
+```sh
+http://downloads.datastax.com/community/dsc-cassandra-2.1.2-bin.tar.gz
+tar -zxvf dsc-cassandra-2.1.2-bin.tar.gz
+./dsc-cassandra-2.1.2/bin/cassandra
+```
 
 ## Prepare Cassandra
 
@@ -28,7 +37,7 @@ node ./server/tools/CQL -s -f ../cql/resetAppKeyspace.cql
 ```
 
 ```javascript
-node ./server/tools/CQL -s -f ../cql/setupDB.cql
+node ./server/tools/CQL -s -f ../cql/setupDB.cql -k rpi
 ```
 
 ## Run app
