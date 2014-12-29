@@ -1,7 +1,7 @@
 {
     "server": {
         "domain": "https://github.com/JEBoothjr",
-        "static": "./client"
+        "static": "./server/public"
     },
     "db": {
         "hosts": ["localhost"],
