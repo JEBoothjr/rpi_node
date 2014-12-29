@@ -17,3 +17,21 @@ cd node-v0.10.35
 make (It takes a while to compile - 2+ hours)
 sudo make install
 ```
+
+## Install Cassandra
+TODO
+
+## Prepare Cassandra
+
+```javascript
+node ./server/tools/CQL -s -f ../cql/resetAppKeyspace.cql
+```
+
+```javascript
+node ./server/tools/CQL -s -f ../cql/setupDB.cql
+```
+
+## Run app
+```sh
+node ./server/app.js
+```
