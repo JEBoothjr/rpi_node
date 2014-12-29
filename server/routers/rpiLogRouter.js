@@ -33,7 +33,7 @@ function validateLogData(data) {
  *
  * @apiError (500) message Error creating log
  */
-router.post('/logs', function(req, res) {
+router.post('/api/logs', function(req, res) {
     var logData = req.body,
         invalidKeys;
 
@@ -71,7 +71,7 @@ router.post('/logs', function(req, res) {
  *
  * @apiError (500) message Error retrieving log
  */
-router.get('/logs/:log_id', function(req, res) {
+router.get('/api/logs/:log_id', function(req, res) {
     rpiLogService.findById(req.params.log_id, function(err, result) {
         if (err) {
             return res.status(err.status).json(err.message);
@@ -95,7 +95,7 @@ router.get('/logs/:log_id', function(req, res) {
  *
  * @apiError (500) message Error retrieving logs
  */
-router.get('/logs', function(req, res) {
+router.get('/api/logs', function(req, res) {
     rpiLogService.findAll(function(err, result) {
         if (err) {
             return res.status(err.status).json(err.message);
@@ -120,7 +120,7 @@ router.get('/logs', function(req, res) {
  *
  * @apiError (500) message Error updating log
  */
-router.put('/logs/:log_id', function(req, res) {
+router.put('/api/logs/:log_id', function(req, res) {
     var logData = req.body,
         invalidKeys;
 
@@ -157,7 +157,7 @@ router.put('/logs/:log_id', function(req, res) {
  *
  * @apiError (500) message Error deleting log
  */
-router.delete('/logs/:log_id', function(req, res) {
+router.delete('/api/logs/:log_id', function(req, res) {
     rpiLogService.delete(req.params.log_id, function(err, result) {
         if (err) {
             return res.status(err.status).json(err.message);
