@@ -30,6 +30,8 @@ tar -zxvf dsc-cassandra-2.1.2-bin.tar.gz
 ./dsc-cassandra-2.1.2/bin/cassandra
 ```
 
+Edit the ./conf/cassandra.yaml and the the 'broadcast_rpc_address' to the ipaddress of the Raspberry Pi. You should be able to connect DataStax DevCenter to it.
+
 ## Prepare Cassandra
 
 ```javascript
