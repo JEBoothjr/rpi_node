@@ -1,0 +1,46 @@
+{
+    "server": {
+        "domain": "localhost",
+        "static": "./client"
+    },
+    "db": {
+        "contactPoints": ["localhost"],
+        "port": 9042,
+        "keyspace": "rpi"
+    },
+    "logging": {
+        "winston": {
+            "folder": "./logs",
+            "levels": {
+                "silly": 0,
+                "debug": 1,
+                "verbose": 2,
+                "info": 3,
+                "warn": 4,
+                "error": 5,
+                "test": 6
+            },
+            "transports": [{
+                "name": "Console",
+                "options": {
+                    "level": "debug",
+                    "silent": false,
+                    "colorize": false,
+                    "timestamp": false
+                }
+            }, {
+                "name": "DailyRotateFile",
+                "options": {
+                    "level": "debug",
+                    "silent": true,
+                    "colorize": false,
+                    "timestamp": true,
+                    "filename": "./logs/floqast-",
+                    "datePattern": "yyyy-MM-dd.log",
+                    "maxsize": "1048576",
+                    "json": true
+                }
+            }]
+        }
+    }
+}

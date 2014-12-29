@@ -1,0 +1,21 @@
+{
+    "server": {
+        "port": 3000
+    },
+    "db": {
+        "keyspace": "rpi_test"
+    },
+    "logging": {
+        "winston": {
+            "transports": [{
+                "name": "Console",
+                "options": {
+                    "level": "test",
+                    "silent": true,
+                    "colorize": false,
+                    "timestamp": false
+                }
+            }]
+        }
+    }
+}
