@@ -10,47 +10,19 @@ var config = require('config'),
 
 function GPIOService() {
     this.CHANNELS = config.get('gpio.channels');
-    this.initialized = false;
 
-    this.initialize = function(callback) {
-        var self = this;
-
-        if (this.initialized) {
-            return callback();
-        }
-
-        async.each(this.CHANNELS, function(channel, callback) {
-            async.series([
-                function(callback) {
-                    gpio.setup(channel, gpio.DIR_OUT, callback);
-                },
-                function(callback) {
-                    gpio.setup(channel, gpio.DIR_IN, callback);
-                }
-            ], function(err) {
-                callback(err);
-            });
+    gpio.on('change', function(channel, value) {
+        logService.create({
+            name: "CHANNEL_CHANGE",
+            description: "Channel " + channel + " = " + value
         }, function(err) {
             if (!err) {
-                self.initialized = true;
-            } else {
-                err = new ServerError(500, "Error in channel setup", self.CHANNELS, err);
+                logger.info("Channel " + channel + " = " + value);
             }
-            callback(err);
         });
-    };
-
-    // gpio.on('change', function(channel, value) {
-    //     logService.create({
-    //         name: "CHANNEL_CHANGE",
-    //         description: "Channel " + channel + " = " + value
-    //     }, function(err, result) {
-    //         logger.info("Channel " + channel + " = " + value);
-    //     });
-    // });
+    });
 
     this.read = function(channel, callback) {
-        var self = this;
 
         if (this.CHANNELS.indexOf(channel) === -1) {
             return callback(new ServerError(404, "Invalid Channel, " + channel, channel));
@@ -58,9 +30,7 @@ function GPIOService() {
 
         async.waterfall([
             function(callback) {
-                self.initialize(function(err) {
-                    callback(err);
-                });
+                gpio.setup(channel, gpio.DIR_OUT, callback);
             },
             function(callback) {
                 gpio.read(channel, function(err, value) {
@@ -95,7 +65,6 @@ function GPIOService() {
     };
 
     this.update = function(channel, value, callback) {
-        var self = this;
 
         if (this.CHANNELS.indexOf(channel) === -1) {
             return callback(new ServerError(404, "Invalid Channel, " + channel, channel));
@@ -103,7 +72,7 @@ function GPIOService() {
 
         async.series({
             init: function(callback) {
-                self.initialize(callback);
+                gpio.setup(channel, gpio.DIR_IN, callback);
             },
             update: function(callback) {
                 gpio.write(channel, value, function(err) {
