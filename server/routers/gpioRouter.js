@@ -47,7 +47,7 @@ router.put('/api/gpio/:channel_id/:channel_value', function(req, res) {
     var channel_id = parseInt(req.params.channel_id),
         channel_value = req.params.channel_value.toLowerCase();
 
-    channel_value = (channel_value === 'true' || channel_value === '1') ? true : false; //We want it to be a boolean
+    channel_value = (channel_value === 'true' || channel_value === '1') ? 1 : 0; //We want it to be a numeric boolean
 
     gpioService.update(channel_id, channel_value, function(err, result) {
         if (err) {

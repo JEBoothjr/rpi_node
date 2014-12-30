@@ -15,6 +15,7 @@ function GPIOService() {
     this.input_gpios = {};
     this.outputs_gpios = {};
 
+    //TODO : Call from app.js startup?
     this.initialize = function(callback) {
         var input,
             inputs_len = this.INPUTS.length,
@@ -39,17 +40,13 @@ function GPIOService() {
     };
 
     this.read = function(num, callback) {
-        var self = this,
-            cur_gpio;
+        var self = this;
 
         async.waterfall([
             function(callback) {
                 self.initialize(callback);
             },
             function(callback) {
-                console.log(self.input_gpios);
-                console.log(self.outputs_gpios);
-
                 self.cur_gpio = self.input_gpios[num] || self.outputs_gpios[num];
                 if (!self.cur_gpio) {
                     return callback(new ServerError(404, "Unknown GPIO Number, " + num, num));
@@ -62,7 +59,6 @@ function GPIOService() {
                     if (err) {
                         err = new ServerError(500, "Error reading gpio, " + num, num, err);
                     }
-                    console.log("R");
                     callback(err, result);
                 });
             },
@@ -91,17 +87,13 @@ function GPIOService() {
     };
 
     this.update = function(num, value, callback) {
-        var self = this,
-            cur_gpio;
+        var self = this;
 
         async.series({
             init: function(callback) {
                 self.initialize(callback);
             },
-            varify: function(callback) {
-                console.log(self.input_gpios);
-                console.log(self.outputs_gpios);
-
+            verify: function(callback) {
                 self.cur_gpio = self.outputs_gpios[num];
                 if (!self.cur_gpio) {
                     return callback(new ServerError(404, "Unknown GPIO Number, " + num, num));
@@ -140,7 +132,6 @@ function GPIOService() {
     };
 
     this.dispose = function() {
-        console.log("DISPOSE");
         var cur_gpio,
             input,
             inputs_len = this.INPUTS.length,
