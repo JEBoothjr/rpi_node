@@ -290,7 +290,7 @@ describe("Log Service", function() {
             });
         });
 
-        it("Should not be able to update a log with an unknown id (WHY DOES THIS SUCCEED CASSANDRA?)", function(done) {
+        it("Should not be able to update a log with an unknown id", function(done) {
 
             logServices.update({
                 id: 'c85e6a70-8a38-11e4-8561-773af88e4896',
@@ -408,7 +408,7 @@ describe("Log Service", function() {
             });
         });
 
-        it("Should not be able to delete a log with an unknown id (WHY DOES THIS SUCCEED CASSANDRA?)", function(done) {
+        it("Should not be able to delete a log with an unknown id", function(done) {
 
             logServices.delete('c85e6a70-8a38-11e4-8561-773af88e4896', function(err, result) {
                 try {

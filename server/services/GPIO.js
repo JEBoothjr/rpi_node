@@ -11,16 +11,16 @@ var config = require('config'),
 function GPIOService() {
     this.CHANNELS = config.get('gpio.channels');
 
-    gpio.on('change', function(channel, value) {
-        logService.create({
-            name: "CHANNEL_CHANGE",
-            description: "Channel " + channel + " = " + value
-        }, function(err) {
-            if (!err) {
-                logger.info("Channel " + channel + " = " + value);
-            }
-        });
-    });
+    // gpio.on('change', function(channel, value) {
+    //     logService.create({
+    //         name: "CHANNEL_CHANGE",
+    //         description: "Channel " + channel + " = " + value
+    //     }, function(err) {
+    //         if (!err) {
+    //             logger.info("Channel " + channel + " = " + value);
+    //         }
+    //     });
+    // });
 
     this.read = function(channel, callback) {
 
