@@ -55,6 +55,16 @@ function GPIOService() {
                     }
                     callback(err, value);
                 });
+            },
+            function(value, callback) {
+                setTimeout(function() {
+                    gpio.destroy(function(err) {
+                        if (err) {
+                            err = new ServerError(500, "Error destroying read, " + channel, channel, err);
+                        }
+                        callback(err, value);
+                    });
+                }, 500);
             }
         ], function(err, result) {
             if (err) {
@@ -102,6 +112,16 @@ function GPIOService() {
                     }
                     callback(err);
                 });
+            },
+            clean: function(callback) {
+                setTimeout(function() {
+                    gpio.destroy(function(err) {
+                        if (err) {
+                            err = new ServerError(500, "Error destroying write, " + channel, channel, err);
+                        }
+                        callback(err);
+                    });
+                }, 500);
             }
         }, function(err) {
             if (!err) {
