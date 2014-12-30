@@ -23,6 +23,12 @@ sudo make install
 sudo apt-get update && sudo apt-get install oracle-java7-jdk
 ```
 
+Install g++
+```sh
+sudo apt-get update
+sudo apt-get install build-essential g++
+```
+
 ```sh
 nano ~/.bashrc
 ```
@@ -57,3 +63,6 @@ node ./server/tools/CQL -s -f ../cql/setupDB.cql -k rpi
 ```sh
 sudo node ./server/app.js
 ```
+Raspberry Pi GPIO Pins
+
+[3, 5, 7, 8, 10, 11, 12, 13, 15, 16, 18, 19, 21, 22, 23, 24, 26, 29, 31, 32, 33, 35, 36, 37, 38, 40]

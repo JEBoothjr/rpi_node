@@ -23,7 +23,7 @@ before(function(done) {
 
 describe("GPIO Service", function() {
 
-    describe("Getting Channel Value", function() {
+    describe("Getting GPIO Value", function() {
 
         beforeEach(function(done) {
 
@@ -32,7 +32,7 @@ describe("GPIO Service", function() {
             });
         });
 
-        it("Should find a channel value", function(done) {
+        it("Should find a GPIO value", function(done) {
             var stub = sinon.stub(gpio, 'read', function(channel, callback) {
                     callback(null, true);
                 }),
@@ -47,7 +47,7 @@ describe("GPIO Service", function() {
                 try {
                     should.equal(err, null);
                     should.exist(result);
-                    result.should.have.property("channel");
+                    result.should.have.property("gpio");
                     should.equal(result.channel, 7);
                     result.should.have.property("value");
                     should.equal(result.value, true);
@@ -58,7 +58,7 @@ describe("GPIO Service", function() {
             });
         });
 
-        it("Should handle log fail on channel setup", function(done) {
+        it("Should handle log fail on GPIO setup", function(done) {
             var stub = sinon.stub(gpio, 'read', function(channel, callback) {
                     callback(null, true);
                 }),
