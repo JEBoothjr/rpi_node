@@ -55,5 +55,5 @@ node ./server/tools/CQL -s -f ../cql/setupDB.cql -k rpi
 
 ## Run app
 ```sh
-node ./server/app.js
+sudo node ./server/app.js
 ```
