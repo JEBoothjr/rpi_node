@@ -30,7 +30,7 @@ function GPIOService() {
 
         async.waterfall([
             function(callback) {
-                gpio.setup(channel, gpio.DIR_OUT, callback);
+                gpio.setup(channel, gpio.DIR_IN, callback);
             },
             function(callback) {
                 gpio.read(channel, function(err, value) {
@@ -72,7 +72,7 @@ function GPIOService() {
 
         async.series({
             init: function(callback) {
-                gpio.setup(channel, gpio.DIR_IN, callback);
+                gpio.setup(channel, gpio.DIR_OUT, callback);
             },
             update: function(callback) {
                 gpio.write(channel, value, function(err) {
