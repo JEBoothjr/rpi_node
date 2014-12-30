@@ -11,7 +11,7 @@
     },
     "gpio": {
         "inputs": [],
-        "outputs": [7]
+        "outputs": [4, 7]
     },
     "logging": {
         "winston": {

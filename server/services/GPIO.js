@@ -162,6 +162,9 @@ function GPIOService() {
                 cur_gpio.unexport();
             }
         }
+
+        this.INPUTS = [];
+        this.OUTPUTS = [];
     };
 }
 
