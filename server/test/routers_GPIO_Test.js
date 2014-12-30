@@ -42,7 +42,6 @@ describe("GPIO Router", function() {
                 .end(function(err, res) {
                     stub.restore();
                     setupStub.restore();
-                    gpioServices.initialized = false;
 
                     try {
                         should.equal(err, null);
@@ -66,16 +65,15 @@ describe("GPIO Router", function() {
                     callback(null, true);
                 });
 
-            request(app).get('/api/gpio/8')
+            request(app).get('/api/gpio/2')
                 .end(function(err, res) {
                     stub.restore();
                     setupStub.restore();
-                    gpioServices.initialized = false;
 
                     try {
                         should.equal(err, null);
                         res.status.should.equal(404);
-                        res.body.should.equal("Invalid Channel, 8");
+                        res.body.should.equal("Invalid Channel, 2");
                         done();
                     } catch (e) {
                         done(e);
@@ -104,7 +102,6 @@ describe("GPIO Router", function() {
                 .end(function(err, res) {
                     stub.restore();
                     setupStub.restore();
-                    gpioServices.initialized = false;
 
                     try {
                         should.equal(err, null);
@@ -132,7 +129,6 @@ describe("GPIO Router", function() {
                 .end(function(err, res) {
                     stub.restore();
                     setupStub.restore();
-                    gpioServices.initialized = false;
 
                     try {
                         should.equal(err, null);
@@ -160,7 +156,6 @@ describe("GPIO Router", function() {
                 .end(function(err, res) {
                     stub.restore();
                     setupStub.restore();
-                    gpioServices.initialized = false;
 
                     try {
                         should.equal(err, null);
@@ -188,7 +183,6 @@ describe("GPIO Router", function() {
                 .end(function(err, res) {
                     stub.restore();
                     setupStub.restore();
-                    gpioServices.initialized = false;
 
                     try {
                         should.equal(err, null);
@@ -212,16 +206,15 @@ describe("GPIO Router", function() {
                     callback(null, true);
                 });
 
-            request(app).put('/api/gpio/8/0')
+            request(app).put('/api/gpio/2/0')
                 .end(function(err, res) {
                     stub.restore();
                     setupStub.restore();
-                    gpioServices.initialized = false;
 
                     try {
                         should.equal(err, null);
                         res.status.should.equal(404);
-                        res.body.should.equal("Invalid Channel, 8");
+                        res.body.should.equal("Invalid Channel, 2");
                         done();
                     } catch (e) {
                         done(e);

@@ -30,7 +30,12 @@ function GPIOService() {
 
         async.waterfall([
             function(callback) {
-                gpio.setup(channel, gpio.DIR_IN, callback);
+                gpio.setup(channel, gpio.DIR_IN, function(err) {
+                    if (err) {
+                        err = new ServerError(500, "Error in channel read setup, " + channel, channel, err);
+                    }
+                    callback(err);
+                });
             },
             function(callback) {
                 gpio.read(channel, function(err, value) {
@@ -72,7 +77,12 @@ function GPIOService() {
 
         async.series({
             init: function(callback) {
-                gpio.setup(channel, gpio.DIR_OUT, callback);
+                gpio.setup(channel, gpio.DIR_OUT, function(err) {
+                    if (err) {
+                        err = new ServerError(500, "Error in channel write setup, " + channel, channel, err);
+                    }
+                    callback(err);
+                });
             },
             update: function(callback) {
                 gpio.write(channel, value, function(err) {

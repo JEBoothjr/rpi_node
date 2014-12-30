@@ -43,7 +43,6 @@ describe("GPIO Service", function() {
             gpioServices.read(7, function(err, result) {
                 stub.restore();
                 setupStub.restore();
-                gpioServices.initialized = false;
 
                 try {
                     should.equal(err, null);
@@ -73,7 +72,7 @@ describe("GPIO Service", function() {
 
                 try {
                     (err.status).should.equal(500);
-                    (err.message).should.equal("Error in channel setup");
+                    (err.message).should.equal("Error in channel read setup, 7");
                     done();
                 } catch (e) {
                     done(e);
@@ -89,13 +88,13 @@ describe("GPIO Service", function() {
                     callback(null, true);
                 });
 
-            gpioServices.read(8, function(err, result) {
+            gpioServices.read(2, function(err, result) {
                 stub.restore();
                 setupStub.restore();
 
                 try {
                     (err.status).should.equal(404);
-                    (err.message).should.equal("Invalid Channel, 8");
+                    (err.message).should.equal("Invalid Channel, 2");
                     done();
                 } catch (e) {
                     done(e);
@@ -172,7 +171,6 @@ describe("GPIO Service", function() {
             gpioServices.update(7, false, function(err, result) {
                 stub.restore();
                 setupStub.restore();
-                gpioServices.initialized = false;
 
                 try {
                     should.equal(err, null);
@@ -202,7 +200,7 @@ describe("GPIO Service", function() {
 
                 try {
                     (err.status).should.equal(500);
-                    (err.message).should.equal("Error in channel setup");
+                    (err.message).should.equal("Error in channel write setup, 7");
                     done();
                 } catch (e) {
                     done(e);
@@ -218,13 +216,13 @@ describe("GPIO Service", function() {
                     callback(null, true);
                 });
 
-            gpioServices.update(8, false, function(err, result) {
+            gpioServices.update(2, false, function(err, result) {
                 stub.restore();
                 setupStub.restore();
 
                 try {
                     (err.status).should.equal(404);
-                    (err.message).should.equal("Invalid Channel, 8");
+                    (err.message).should.equal("Invalid Channel, 2");
                     done();
                 } catch (e) {
                     done(e);
