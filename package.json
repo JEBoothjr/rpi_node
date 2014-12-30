@@ -1,7 +1,7 @@
 {
-    "name": "peaposy.com",
-    "description": "The peaposy.com website",
-    "version": "0.0.1",
+    "name": "rpl_node",
+    "description": "Raspberry Pi, node.js and cassandra application",
+    "version": "0.0.5",
     "private": true,
     "dependencies": {
         "async": "0.9.0",
