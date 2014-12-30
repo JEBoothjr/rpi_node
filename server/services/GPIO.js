@@ -109,6 +109,14 @@ function GPIOService() {
                     callback(err);
                 });
             },
+            read: function(callback) {
+                self.cur_gpio.read(function(err, result) {
+                    if (err) {
+                        err = new ServerError(500, "Error reading gpio, " + num, num, err);
+                    }
+                    callback(err);
+                });
+            },
             log: function(callback) {
                 logService.create({
                     name: "GPIO_UPDATE",
@@ -120,13 +128,13 @@ function GPIOService() {
                     callback(err);
                 });
             }
-        }, function(err) {
+        }, function(err, result) {
             if (!err) {
-                logger.info("GPIO " + num + " value is now " + value);
+                logger.info("GPIO " + num + " value is now " + result.read);
             }
             callback(err, {
                 gpio: num,
-                value: value
+                value: result.read
             });
         });
     };
