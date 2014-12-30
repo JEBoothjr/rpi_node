@@ -1,33 +1,17 @@
 {
     "server": {
-        "domain": "https://github.com/JEBoothjr",
+        "domain": "http://192.168.1.107",
         "static": "./server/public"
-    },
-    "db": {
-        "hosts": ["localhost"],
-        "port": 9042
     },
     "logging": {
         "winston": {
             "transports": [{
                 "name": "Console",
                 "options": {
-                    "level": "debug",
+                    "level": "error",
                     "silent": false,
                     "colorize": false,
                     "timestamp": false
-                }
-            }, {
-                "name": "DailyRotateFile",
-                "options": {
-                    "level": "debug",
-                    "silent": true,
-                    "colorize": false,
-                    "timestamp": true,
-                    "filename": "./logs/floqast-",
-                    "datePattern": "yyyy-MM-dd.log",
-                    "maxsize": "1048576",
-                    "json": true
                 }
             }]
         }

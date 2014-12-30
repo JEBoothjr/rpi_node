@@ -14,7 +14,8 @@ var config = require('config'),
     tokenMiddleware = require('./middleware/Token.js').token,
     siteRouter = require('./routers/siteRouter').router,
     authRouter = require('./routers/apiRouter').router,
-    rpiLogRouter = require('./routers/rpiLogRouter').router,
+    logRouter = require('./routers/logRouter').router,
+    gpioRouter = require('./routers/gpioRouter').router,
     logger = require('./lib/Logger'),
     BaseModel = require('./models/Base'),
     cassandraClient;
@@ -50,7 +51,8 @@ var initRoutingAndMiddleware = function(callback) {
     app.use(tokenMiddleware); //Must be first for token middleware to be handled first
     app.use(siteRouter);
     app.use(authRouter);
-    app.use(rpiLogRouter);
+    app.use(logRouter);
+    app.use(gpioRouter);
 
     app.use(errorMiddleware); //Must be last
 

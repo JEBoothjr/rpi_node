@@ -1,7 +1,7 @@
 var _ = require('lodash'),
     words = require('./mocks/words.json'),
     async = require('async'),
-    RPILogModel = require('../../models/RPILog');
+    LogModel = require('../../models/Log');
 
 exports.generateEntityName = function() {
     var result,
@@ -23,7 +23,7 @@ exports.generateEntityName = function() {
 
 
 exports.createLog = function(options, callback) {
-    var rpiLogModel = new RPILogModel();
+    var logModel = new LogModel();
 
     if (arguments.length < 2) {
         callback = _.isFunction(options) ? options : null;
@@ -33,7 +33,7 @@ exports.createLog = function(options, callback) {
 
     options.name = options.name || this.generateEntityName();
 
-    rpiLogModel.create(options, function(err, result) {
+    logModel.create(options, function(err, result) {
         callback(err, result);
     });
 };

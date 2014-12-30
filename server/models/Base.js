@@ -6,7 +6,7 @@ var _ = require('lodash'),
     resultProcessor = require('../utils/ResultProcessor');
 
 var Model = function() {
-    //this.initialize.apply(this, arguments);
+
 };
 
 var wrapQuotes = function(value) {
