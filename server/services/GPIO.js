@@ -34,7 +34,7 @@ function GPIOService() {
             if (!err) {
                 self.initialized = true;
             } else {
-                err = new ServerError(500, "Error in channel setup", null, err);
+                err = new ServerError(500, "Error in channel setup", this.CHANNELS, err);
             }
             callback(err);
         });
