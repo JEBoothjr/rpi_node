@@ -3,11 +3,12 @@
 
 var request,
     app,
+    fs = require('fs'),
     async = require('async'),
     sinon = require('sinon'),
     should = require('should'),
     common = require('./lib/common'),
-    gpio = require('rpi-gpio'),
+    GPIO = require('onoff').Gpio,
     LogModel = require('../models/Log'),
     gpioServices = require('../services/GPIO').GPIOService,
     logServices = require('../services/Log').LogService,
@@ -33,16 +34,40 @@ describe("GPIO Service", function() {
         });
 
         it("Should find a GPIO value", function(done) {
-            var stub = sinon.stub(gpio, 'read', function(channel, callback) {
-                    callback(null, true);
+            var fsStub1 = sinon.stub(fs, 'existsSync', function(path) {
+                    return false;
                 }),
-                setupStub = sinon.stub(gpio, 'setup', function(channel, direction, callback) {
-                    callback(null, true);
+                fsStub2 = sinon.stub(fs, 'writeFileSync', function(path) {
+                    return true;
+                }),
+                fsStub3 = sinon.stub(fs, 'chmodSync', function(path) {
+                    return true;
+                }),
+                fsStub4 = sinon.stub(fs, 'openSync', function(path) {
+                    return true;
+                }),
+                fsStub5 = sinon.stub(fs, 'readSync', function(path) {
+                    return true;
+                }),
+                fsStub6 = sinon.stub(fs, 'closeSync', function(path) {
+                    return true;
+                }),
+                fsStub7 = sinon.stub(GPIO.prototype, 'read', function(callback) {
+                    callback(1);
+                }),
+                fsStub8 = sinon.stub(gpioServices, 'dispose', function() {
+
                 });
 
             gpioServices.read(7, function(err, result) {
-                stub.restore();
-                setupStub.restore();
+                fsStub1.restore();
+                fsStub2.restore();
+                fsStub3.restore();
+                fsStub4.restore();
+                fsStub5.restore();
+                fsStub6.restore();
+                fsStub7.restore();
+                //fsStub8.restore();
 
                 try {
                     should.equal(err, null);

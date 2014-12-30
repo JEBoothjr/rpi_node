@@ -47,21 +47,22 @@ function GPIOService() {
                 self.initialize(callback);
             },
             function(callback) {
-                console.log(this.input_gpios);
-                console.log(this.outputs_gpios);
+                console.log(self.input_gpios);
+                console.log(self.outputs_gpios);
 
-                cur_gpio = this.input_gpios[num] || this.outputs_gpios[num];
-                if (!cur_gpio) {
+                self.cur_gpio = self.input_gpios[num] || self.outputs_gpios[num];
+                if (!self.cur_gpio) {
                     return callback(new ServerError(404, "Unknown GPIO Number, " + num, num));
                 }
 
                 callback();
             },
             function(callback) {
-                cur_gpio.read(function(err, result) {
+                self.cur_gpio.read(function(err, result) {
                     if (err) {
                         err = new ServerError(500, "Error reading gpio, " + num, num, err);
                     }
+                    console.log("R");
                     callback(err, result);
                 });
             },
@@ -98,18 +99,18 @@ function GPIOService() {
                 self.initialize(callback);
             },
             varify: function(callback) {
-                console.log(this.input_gpios);
-                console.log(this.outputs_gpios);
+                console.log(self.input_gpios);
+                console.log(self.outputs_gpios);
 
-                cur_gpio = this.outputs_gpios[num];
-                if (!cur_gpio) {
+                self.cur_gpio = self.outputs_gpios[num];
+                if (!self.cur_gpio) {
                     return callback(new ServerError(404, "Unknown GPIO Number, " + num, num));
                 }
 
                 callback();
             },
             update: function(callback) {
-                cur_gpio.write(value, function(err) {
+                self.cur_gpio.write(value, function(err) {
                     if (err) {
                         err = new ServerError(500, "Error updating GPIO, " + num + "=" + value, num, err);
                     }

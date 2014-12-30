@@ -3,3 +3,4 @@ documentation
 server/public
 *.log
 *.DS_Store
+*.build
