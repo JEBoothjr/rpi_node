@@ -114,7 +114,10 @@ function GPIO(gpio, options) {
         throw new Error("This pin number, " + gpio + ", is not a valid pin.");
     }
 
-    this.setDirection(options && options.direction || DIR_OUT);
+    this.export(function() {
+        this.setDirection(options && options.direction || DIR_OUT);
+    });
+
     //TODO :  this.setEdge(options.edge || EDGE_NONE);
 }
 
