@@ -2,7 +2,7 @@
 'use strict';
 
 var config = require('config'),
-    GPIO = require('onoff').Gpio,
+    GPIO = require('../lib/RasPi_GPIO'),
     async = require('async'),
     ServerError = require('../lib/Error').ServerError,
     logService = require('./Log').LogService,
@@ -29,11 +29,15 @@ function GPIOService() {
 
         for (i = 0; i < outputs_len; i++) {
             output = this.OUTPUTS[i];
-            this.outputs_gpios[output] = new GPIO(output, 'out');
+            this.outputs_gpios[output] = new GPIO(output, {
+                direction: 'out'
+            });
         }
         for (i = 0; i < inputs_len; i++) {
             input = this.INPUTS[i];
-            this.outputs_gpios[input] = new GPIO(input, 'in', 'both');
+            this.outputs_gpios[input] = new GPIO(input, {
+                direction: 'in'
+            });
         }
 
         callback();
