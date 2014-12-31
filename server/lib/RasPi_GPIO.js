@@ -102,6 +102,8 @@ GPIOError.prototype.name = 'GPIOError';
 exports.GPIOError = GPIOError;
 
 function GPIO(gpio, options) {
+    var self = this;
+
     if (!gpio || isNaN(parseInt(gpio, 10))) {
         throw new Error("A valid GPIO number is require when instantiating a GPIO.");
     }
@@ -115,7 +117,7 @@ function GPIO(gpio, options) {
     }
 
     this.export(function() {
-        this.setDirection(options && options.direction || DIR_OUT);
+        self.setDirection(options && options.direction || DIR_OUT);
     });
 
     //TODO :  this.setEdge(options.edge || EDGE_NONE);
@@ -139,7 +141,8 @@ GPIO.initialize = function() {
 
     cpuInfo = fs.readFileSync(GPIO.GPIO_CPU_INFO_FILE, 'utf8');
     revMatch = cpuInfo.match(/Revision\s*:\s*[0-9a-f]*([0-9a-f]{4})/);
-    pinMap = (parseInt(revMatch[1], 16) < 4) ? PIN_MAP.V1 : PIN_MAP.V2;
+    //pinMap = (parseInt(revMatch[1], 16) < 4) ? PIN_MAP.V1 : PIN_MAP.V2;
+    pinMap = PIN_MAP.V2;
 
     GPIO.initialized = true;
 };
