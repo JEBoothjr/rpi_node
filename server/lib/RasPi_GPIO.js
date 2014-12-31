@@ -153,6 +153,7 @@ GPIO.prototype.read = function(callback) {
     callback = callback || noop; //Why would we need this, really?
 
     fs.readFile(GPIO.GPIO_ROOT_PATH + "/gpio" + this.pin + "/value", function(err, val) {
+        console.log(err);
         if (err) {
             err = new GPIOError('read_error', {
                 pin: self.pin
@@ -181,6 +182,7 @@ GPIO.prototype.write = function(value, callback) {
     callback = callback || noop;
 
     fs.writeFile(GPIO.GPIO_ROOT_PATH + "/gpio" + this.pin + "/value", value, "utf8", function(err) {
+        console.log(err);
         if (err) {
             err = new GPIOError('write_error', {
                 pin: self.pin
