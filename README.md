@@ -57,3 +57,7 @@ node ./server/tools/CQL -s -f ../cql/setupDB.cql -k rpi
 ```sh
 sudo node ./server/app.js
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/JEBoothjr/rpi_node/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
